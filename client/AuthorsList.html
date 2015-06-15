@@ -1,0 +1,17 @@
+<template name="AuthorsList">
+  <h3>Authors:</h3>
+  <!-- We can use different collections and it works as well. -->
+  {{#each
+    GetList
+    listName="AuthorsMainList"
+    listCollection="Authors"
+  }}
+    <div>
+      <strong>Author Name:</strong> {{GetListItem "Authors" "name"}}
+    </div>
+    <div>
+      <strong>Author Death:</strong> {{GetListItem "Authors" "death"}}
+    </div>
+    <hr>
+  {{/each}}
+</template>
