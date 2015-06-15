@@ -1,40 +1,33 @@
 <template name="BookList">
 
-  <h3>Books:</h3>
-
-  <!-- First we can retrieve all the Books using GetList. Maybe we can use
-       parameters here to control the limit, sort and so on. -->
-  {{#each GetList "Books"}}
-    <div>
-      <!-- Then we use GetItem to get each individual field. Once we add one
-          the subscription is intelligent enough to retrieve that field. -->
-      <strong>Book Name:</strong> {{GetItem "Books" "name"}}
-    </div>
-    <div>
-      <strong>Book Desc:</strong> {{GetItem "Books" "desc"}}
-    </div>
-    <div>
-      <!-- We should be able to trasverse collection and get the Author name
-           here instead of the ID, but I haven't figured it out yet. -->
-      <strong>Book Author:</strong> {{GetItem "Books" "author"}}
-    </div>
-    <hr>
+  <h3>Classic Books:</h3>
+  <!-- First we can retrieve all classic Books using GetList. -->
+  {{#each
+    GetList
+    listName       = "ClassicBooksList"
+    listCollection = "Books"
+    sortDesc       = "name"
+    limit          = 3
+    skip           = 0
+    tags           = "classic"
+  }}
+  <!-- Now we can include another template but it's not needed, you can
+       keep adding html here -->
+    {{> BookItem}}
+  <!-- And finally we end the each loop -->
   {{/each}}
 
-  <h3>Authors:</h3>
-  <!-- We can use different collections and it works as well. -->
-  {{#each GetList "Authors"}}
-    <!-- We can use nested templates and it works as well. -->
-    {{> AuthorItem}}
+  <h3>Unkown Books:</h3>
+  <!-- Here we retrieve books but with a different selector -->
+  {{#each
+    GetList
+    listName       = "UnkownBooksList"
+    listCollection = "Books"
+    tags           = "unkown"
+  }}
+  <!-- We can reuse the same templates with different lists -->
+    {{> BookItem}}
   {{/each}}
-</template>
 
-<template name="AuthorItem">
-  <div>
-    <strong>Author Name:</strong> {{GetItem "Authors" "name"}}
-  </div>
-  <div>
-    <strong>Author Death:</strong> {{GetItem "Authors" "death"}}
-  </div>
-  <hr>
+  {{> AuthorsList}}
 </template>
