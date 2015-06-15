@@ -31,3 +31,22 @@
 
   {{> AuthorsList}}
 </template>
+
+
+
+<template name="BookItem">
+  <div>
+    <!-- Use GetListItem to get each individual field. -->
+    <strong>Book Name:</strong> {{GetListItem "Books" "name"}}
+  </div>
+  <div>
+    <strong>Book Desc:</strong> {{GetListItem "Books" "desc"}}
+  </div>
+  <div>
+    <strong>Book Author:</strong> {{GetListItem "Books" "author"}}
+  </div>
+  <div>
+    <strong>Book publication:</strong> {{GetListItem "Books" "dates.published"}}
+  </div>
+  <hr>
+</template>
